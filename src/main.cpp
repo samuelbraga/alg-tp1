@@ -3,6 +3,7 @@
 #include <sstream>
 #include <cstdlib>
 #include "graph/graph.hpp"
+#include "distribution-center/distribution-center.hpp"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ vector<int> getAdjacency()
 }
 
 void setAdjacencyCenterDistribution(int num_vaccination_center,
-  vector<Graph> &graphs)
+  vector<DistributionCenter> &centers)
 {
   // Ocorre um bug que na primeira entrada do getline()
   // ela não realiza o input das entradas. Dessa forma, adicionei essa
@@ -38,15 +39,13 @@ void setAdjacencyCenterDistribution(int num_vaccination_center,
 
     vector<int>::iterator it;
     for(it = adjacency.begin(); it != adjacency.end(); ++it)
-      graphs.at(i).addAdjacentNode(0, *it);
+      centers.at(i).addAdjacentNode(*it);
   }
 }
 
-void setAdjacencyVaccinationPost(int num_vaccination_post,
-  int num_vaccination_center,
-  vector<Graph> &graphs)
+void setAdjacencyVaccinationPost(int num_vaccination_post, Graph &graphs)
 {
-  for(int i = 1; i < num_vaccination_post; i++)
+  for(int i = 1; i <= num_vaccination_post; i++)
   {    
     vector<int> adjacency = getAdjacency();
 
@@ -55,8 +54,7 @@ void setAdjacencyVaccinationPost(int num_vaccination_post,
     {
       if(*it != 0)
       {
-        for (int j = 0; j < num_vaccination_center; j++)
-          graphs.at(j).addAdjacentNode(i, *it);
+        graphs.addAdjacentNode(i, *it);
       }
     }
   }
@@ -72,22 +70,29 @@ int main()
     &num_vaccination_post,
     &rate_incrase);
 
-  int num_nodes = 1 + num_vaccination_post;
-
-  vector<Graph> graphs;
   
-  for(int i = 0; i < num_vaccination_center; i++)
+  int num_node = num_vaccination_post + 1;
+
+  Graph graph = Graph(num_node, rate_incrase);
+  vector<DistributionCenter> centers;
+  
+  for(int i = 1; i <= num_vaccination_center; i++)
   {
-    Graph graph = Graph(num_nodes, rate_incrase);
-    graphs.push_back(graph);
+    DistributionCenter center = DistributionCenter(i);
+    centers.push_back(center);
   }
   
-  setAdjacencyCenterDistribution(num_vaccination_center, graphs);
-  setAdjacencyVaccinationPost(num_vaccination_post, num_vaccination_center, graphs);
+  setAdjacencyCenterDistribution(num_vaccination_center, centers);
+  setAdjacencyVaccinationPost(num_node, graph);
 
   for(int i = 0; i < num_vaccination_center; i++)
   {
-    graphs.at(i).DFS(0);
+    vector<int> adjacency = centers.at(i).getAdjacency();
+
+    vector<int>::iterator it;
+    for(it = adjacency.begin(); it != adjacency.end(); ++it)
+      graph.DFS(*it);
+    
     printf("\n");
   }
 
