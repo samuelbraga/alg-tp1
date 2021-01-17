@@ -7,6 +7,9 @@
 
 using namespace std;
 
+const int initialTemperature = -90;
+const int limitTemperature = -60;
+
 class Graph {
   private:
     int vertex;
