@@ -95,12 +95,21 @@ int main()
     }
 
   vector<int> result = graph.getResult();
-  for (vector<int>::iterator i = result.begin();
+
+  cout << result.size();
+  printf("\n");
+
+  if(result.size() == 0)
+  {
+    cout << "*";
+  }
+  else
+  {
+    for (vector<int>::iterator i = result.begin();
     i != result.end();
     ++i)
-  {
-    cout << *i << " ";
-  }
+      cout << *i << " ";
+  }  
 
   printf("\n");
 
