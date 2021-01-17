@@ -45,7 +45,7 @@ void setAdjacencyCenterDistribution(int num_vaccination_center,
 
 void setAdjacencyVaccinationPost(int num_vaccination_post, Graph &graphs)
 {
-  for(int i = 1; i <= num_vaccination_post; i++)
+  for(int i = 1; i < num_vaccination_post; i++)
   {    
     vector<int> adjacency = getAdjacency();
 
@@ -92,9 +92,21 @@ int main()
     vector<int>::iterator it;
     for(it = adjacency.begin(); it != adjacency.end(); ++it)
       graph.DFS(*it);
-    
-    printf("\n");
+    }
+
+  vector<int> result = graph.getResult();
+  for (vector<int>::iterator i = result.begin();
+    i != result.end();
+    ++i)
+  {
+    cout << *i << " ";
   }
+
+  printf("\n");
+
+  bool cycle = graph.getCycle();
+  (cycle) ? cout << 1 : cout << 0;
+  printf("\n");
 
   return 0;
 }

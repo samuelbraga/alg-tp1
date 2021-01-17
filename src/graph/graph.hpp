@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <list>
 #include <vector>
+#include <set>
 #ifndef __TP1_ALG___
 #define __TP1_ALG__
 
@@ -14,8 +15,10 @@ class Graph {
   private:
     int vertex;
     vector<int> temperature;
+    vector<int> result;
     list<int>* adjacency;
     int increase;
+    bool cycle;
   
     void DFSRecursive(int vertex, bool visited[]);
  
@@ -23,6 +26,8 @@ class Graph {
     Graph(int vertex, int increase);
     
     void addAdjacentNode(int source, int destination);
+    vector<int> getResult();
+    bool getCycle();
     void DFS(int vertex);
 };
 
