@@ -16,4 +16,4 @@ test: $(EXEC)
 	@bash run_tests.sh $(EXEC) $(TMPOUT)
 
 clean:
-	rm -rf .graph
+	rm -rf tp1 graph.o distribution-center.o
