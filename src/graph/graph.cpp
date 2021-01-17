@@ -42,8 +42,8 @@ void Graph::DFSRecursive(int vertex, bool visited[])
 
 void Graph::DFS(int vertex)
 {
-  bool* visited = new bool[vertex];
-  for (int i = 0; i < vertex; i++)
+  bool* visited = new bool[this->vertex];
+  for (int i = 0; i < this->vertex; i++)
     visited[i] = false;
 
   this->temperature[vertex] = initialTemperature + increase;
