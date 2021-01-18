@@ -13,7 +13,7 @@ const int limitTemperature = -60;
 
 class Graph {
   private:
-    int vertex;
+    int length;
     vector<int> temperature;
     vector<int> result;
     list<int>* adjacency;

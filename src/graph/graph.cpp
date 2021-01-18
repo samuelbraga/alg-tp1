@@ -2,10 +2,10 @@
 
 Graph::Graph(int vertex, int increase)
 {
-  this->vertex = vertex;
+  this->length = vertex;
   this->increase = increase;
-  this->adjacency = new list<int>[vertex];
-  vector<int> temperature(this->vertex);
+  this->adjacency = new list<int>[ this->length];
+  vector<int> temperature(this->length);
   this->temperature = temperature;
   this->cycle = false;
 }
@@ -42,8 +42,8 @@ void Graph::DFSRecursive(int vertex, bool visited[])
 
 void Graph::DFS(int vertex)
 {
-  bool* visited = new bool[this->vertex];
-  for (int i = 0; i < this->vertex; i++)
+  bool* visited = new bool[this->length];
+  for (int i = 0; i < this->length; i++)
     visited[i] = false;
 
   this->temperature[vertex] = initialTemperature + increase;
