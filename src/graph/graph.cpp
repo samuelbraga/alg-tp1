@@ -4,7 +4,7 @@ Graph::Graph(int vertex, int increase)
 {
   this->length = vertex;
   this->increase = increase;
-  this->adjacency = new list<int>[ this->length];
+  this->adjacency = new list<int>[this->length];
   vector<int> temperature(this->length);
   this->temperature = temperature;
   this->cycle = false;
