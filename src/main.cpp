@@ -70,7 +70,6 @@ int main()
     &num_vaccination_post,
     &rate_incrase);
 
-  
   int num_node = num_vaccination_post + 1;
 
   Graph graph = Graph(num_node, rate_incrase);
