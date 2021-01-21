@@ -91,7 +91,7 @@ int main()
     vector<int>::iterator it;
     for(it = adjacency.begin(); it != adjacency.end(); ++it)
       graph.DFS(*it);
-    }
+  }
 
   vector<int> result = graph.getResult();
 
